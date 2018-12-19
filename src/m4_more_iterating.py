@@ -10,8 +10,8 @@ in testing and BOUNDARY (EDGE) TESTING.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Nasser Hegar.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import random
 import builtins  # Never necessary, but here to make a point about SUM
@@ -35,9 +35,9 @@ import math
 def main():
     """ Calls the   TEST   functions in this module. """
     run_test_sum_sequence()
-    # run_test_count_items_bigger_than()
-    # run_test_count_positive_sines()
-    # run_test_sum_first_n()
+    run_test_count_items_bigger_than()
+    run_test_count_positive_sines()
+    run_test_sum_first_n()
 
 
 def run_test_sum_sequence():
@@ -48,7 +48,7 @@ def run_test_sum_sequence():
     print('--------------------------------------------------')
 
     # -------------------------------------------------------------------------
-    # TODO: 2. READ the COMMENTS and CODE in this function,
+    # DONE: 2. READ the COMMENTS and CODE in this function,
     #  asking questions as needed.
     #
     #   When you believe that you understand:
@@ -222,7 +222,7 @@ def sum_sequence(sequence):
       :type sequence: list or tuple (of integers)
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # RESTRICTION:
@@ -231,12 +231,18 @@ def sum_sequence(sequence):
     #      -- The TESTING code above does use   built_ins.sum
     #         as an ORACLE in TESTING this function, however.
     # -------------------------------------------------------------------------
+    total = 0
+    for k in range(len(sequence)):
+        total += sequence[k]
+
+    return total
+
 
 
 def run_test_count_items_bigger_than():
     """ Tests the   count_items_bigger_than   function. """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  count_items_bigger_than  function defined below.
     #   Include at least ** 2 ** ADDITIONAL tests.
     #
@@ -360,7 +366,58 @@ def run_test_count_items_bigger_than():
     print('  to see whether or not that seems to be true')
     print('  for your code (and Python\'s pseudo-random numbers).')
 
-    # TODO 4 (continued):  Add your 2 ADDITIONAL tests here:
+    # DONE 4 (continued):  Add your 2 ADDITIONAL tests here:
+
+    # Test 7:  This test uses a RANDOMLY generated sequence
+    #          but a KNOWN answer (ALL in the sequence are > threshold).
+
+    # Next lines make a sequence of 100,000 RANDOM numbers,
+    # with each chosen from -100 to 99 (inclusive):
+    sequence = []
+    for _ in range(100000):
+        sequence.append(random.randrange(-100, 100))
+
+    threshold = 10000000001
+    expected = 0
+    actual = count_items_bigger_than(sequence, threshold)
+    print()
+    print('Test 9 expected:', expected)
+    print('       actual:  ', actual)
+
+    # Test 7:  This test uses a RANDOMLY generated sequence
+    #          but a KNOWN answer (ALL in the sequence are > threshold).
+
+    # Next lines make a sequence of 100,000 RANDOM numbers,
+    # with each chosen from -100 to 99 (inclusive):
+    sequence = []
+    for _ in range(100000):
+        sequence.append(random.randrange(-100, 100))
+
+    threshold = 0
+    expected = 100000/2
+    actual = count_items_bigger_than(sequence, threshold)
+    print()
+    print('Test 7 expected:', expected)
+    print('       actual:  ', actual)
+
+    # Test 8:  This test uses a RANDOMLY generated sequence
+    #          and an APPROXIMATE answer that is PROBABLY about right,
+    #          based on PROBABILITY THEORY (the Law of Large Numbers).
+
+    # Next lines make a sequence of 100,000 RANDOM numbers,
+    # with each chosen from -100 to 99 (inclusive):
+    sequence = []
+    n = 100000
+    for _ in range(n):
+        sequence.append(random.randrange(-100, 100))
+
+    threshold = 98
+    expected = n * (1 / 200)
+    actual = count_items_bigger_than(sequence, threshold)
+    standard_deviation = math.sqrt(n * (1 / 200) * (199 / 200))
+
+
+
 
 
 def count_items_bigger_than(numbers, threshold):
@@ -397,15 +454,21 @@ def count_items_bigger_than(numbers, threshold):
       :type threshold: float
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
+    count = 0
+    for k in range(len(numbers)):
+        if numbers[k] > threshold:
+            count += 1
+    return count
+
 
 
 def run_test_count_positive_sines():
     """ Tests the   count_positive_sines   function. """
     # -------------------------------------------------------------------------
-    # TODO: 6. Implement this TEST function.
+    # DONE: 6. Implement this TEST function.
     #   It TESTS the  count_positive_sines  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond what we supplied.
     #
@@ -527,9 +590,16 @@ def count_positive_sines(numbers):
       :type sequence: list or tuple (of numbers)
     """
     # -------------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
+    # DONE: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
+    count = 0
+
+    for k in range(len(numbers)):
+        if math.sin(numbers[k]) > 0:
+            count += 1
+
+    return count
 
 
 def run_test_sum_first_n():
@@ -638,6 +708,12 @@ def sum_first_n(numbers, n):
     #      -- The TESTING code above does use   built_ins.sum
     #         as an ORACLE in TESTING this function, however.
     # -------------------------------------------------------------------------
+    total = 0
+    for k in range(0,n):
+        total += numbers[k]
+    return total
+
+
 
 
 # -----------------------------------------------------------------------------
